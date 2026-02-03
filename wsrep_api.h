@@ -1481,6 +1481,19 @@ struct wsrep_st {
     wsrep_seqno_t (*pause) (wsrep_t* wsrep);
 
   /*!
+   * @brief Tries to desync and pause without blocking.
+   *
+   * Non-blocking variant of desync + pause: desynchronizes the node from
+   * the cluster and pauses applying/committing. If the node cannot desync
+   * or pause immediately (e.g. not at head of local monitor, or applier
+   * not drained), returns undefined so the caller can retry.
+   *
+   * @return global sequence number of the paused state on success,
+   *         or WSREP_SEQNO_UNDEFINED if desync/pause would block or failed.
+   */
+   wsrep_seqno_t (*try_desync_and_pause) (wsrep_t* wsrep);
+
+  /*!
    * @brief Resumes writeset applying/committing.
    */
     wsrep_status_t (*resume) (wsrep_t* wsrep);
