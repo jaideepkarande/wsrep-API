@@ -365,6 +365,12 @@ static wsrep_seqno_t dummy_pause (wsrep_t* w)
     return -ENOSYS;
 }
 
+static wsrep_seqno_t dummy_try_pause (wsrep_t* w)
+{
+    WSREP_DBUG_ENTER(w);
+    return -ENOSYS;
+}
+
 static wsrep_status_t dummy_resume (wsrep_t* w)
 {
     WSREP_DBUG_ENTER(w);
@@ -446,6 +452,7 @@ static wsrep_t dummy_iface = {
     &dummy_fetch_pfs_info,
     &dummy_rotate_gcache_key,
     &dummy_pause,
+    &dummy_try_pause,
     &dummy_resume,
     &dummy_desync,
     &dummy_resync,

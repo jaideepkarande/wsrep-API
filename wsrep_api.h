@@ -1481,6 +1481,15 @@ struct wsrep_st {
     wsrep_seqno_t (*pause) (wsrep_t* wsrep);
 
   /*!
+   * @brief Tries to pause writeset applying/committing without blocking.
+   *
+   * @return global sequence number of the paused state,
+   *         -EAGAIN if pausing would block,
+   *         or other negative error code.
+   */
+   wsrep_seqno_t (*try_pause) (wsrep_t* wsrep);
+
+  /*!
    * @brief Resumes writeset applying/committing.
    */
     wsrep_status_t (*resume) (wsrep_t* wsrep);
